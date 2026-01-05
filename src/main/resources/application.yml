@@ -11,6 +11,25 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
+logging:
+  # Настройка уровней
+  level:
+    root: INFO                                # Для все библиотек - только важное
+    org.example.carsharing_71: DEBUG          # Для НАШЕГО кода - подробно
+    org.hibernate.sql: DEBUG                  # Показать SQL-запросы
+    org.hibernate.type.descriptor.sql: TRACE  # Показать параметры (? -> value)
+  # Настройка файла (если нужно сохранять логи)
+  file:
+    name: logs/app.log                        # Куда писать
+    max-history: 7                            # Хранить 7 дней
+    max-size: 10MB                            # Ротация: не больше 10 Мб
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
