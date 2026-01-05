@@ -1,0 +1,32 @@
+# Индексы для ускорения выборок и проверки доступности автомобилей
+databaseChangeLog:
+  - changeSet:
+      id: 003-add-indexes
+      author: DevDanko
+      changes:
+        # Индекс для запроса доступности: фильтрация по car_id, status, start_at, end_at
+        - createIndex:
+            tableName: reservations
+            indexName: ix_reservations_car_status_start_end
+            columns:
+              - column:
+                  name: car_id
+              - column:
+                  name: status
+              - column:
+                  name: start_at
+              - column:
+                  name: end_at
+        # Индексы для внешних ключей в cars (частые фильтры)
+        - createIndex:
+            tableName: cars
+            indexName: ix_cars_model
+            columns:
+              - column:
+                  name: model_id
+        - createIndex:
+            tableName: cars
+            indexName: ix_cars_location
+            columns:
+              - column:
+                  name: location_id

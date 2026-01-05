@@ -1,0 +1,96 @@
+# Начальные данные для демонстрации
+databaseChangeLog:
+  - changeSet:
+      id: 002-seed-car-models
+      author: DevDanko
+      changes:
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "Toyota" }
+              - column: { name: model_name, value: "Corolla" }
+              - column: { name: seats, valueNumeric: 5 }
+              - column: { name: transmission, value: "AUTOMATIC" }
+              - column: { name: fuel_type, value: "PETROL" }
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "Skoda" }
+              - column: { name: model_name, value: "Octavia" }
+              - column: { name: seats, valueNumeric: 5 }
+              - column: { name: transmission, value: "MANUAL" }
+              - column: { name: fuel_type, value: "DIESEL" }
+
+  - changeSet:
+      id: 002-seed-locations
+      author: DevDanko
+      changes:
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Пергамский музей (Pergamonmuseum)" }
+              - column: { name: address, value: "Bodestraße 1-3, 10178 Berlin, Германия" }
+              - column: { name: latitude, valueNumeric: 52.521183 }
+              - column: { name: longitude, valueNumeric: 13.3969 }
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Аэропорт Берлин-Бранденбург Интернациональ (BER)" }
+              - column: { name: address, value: "Melli-Beese-Ring 1, 12529 Schönefeld, Германия" }
+              - column: { name: latitude, valueNumeric: 52.3649645 }
+              - column: { name: longitude, valueNumeric: 13.5010472 }
+
+  - changeSet:
+      id: 002-seed-cars
+      author: DevDanko
+      changes:
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueNumeric: 1 }
+              - column: { name: plate_number, value: "A123BC77" }
+              - column: { name: vin, value: "JTDBR32E520015123" }
+              - column: { name: location_id, valueNumeric: 1 }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueNumeric: 2 }
+              - column: { name: plate_number, value: "B456CD77" }
+              - column: { name: vin, value: "TMBJG7NE6F0123456" }
+              - column: { name: location_id, valueNumeric: 2 }
+              - column: { name: status, value: "MAINTENANCE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueNumeric: 2 }
+              - column: { name: plate_number, value: "C789DE77" }
+              - column: { name: vin, value: "TMBJG7NE6F0654321" }
+              - column: { name: location_id, valueNumeric: 1 }
+              - column: { name: status, value: "AVAILABLE" }
+
+  - changeSet:
+      id: 002-seed-users
+      author: DevDanko
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: "student@example.com" }
+              - column: { name: full_name, value: "Студент Учебный" }
+              - column: { name: role, value: "ROLE_USER" }
+              - column: { name: created_at, value: "2025-01-10 09:00:00" }
+
+  - changeSet:
+      id: 002-seed-reservations
+      author: DevDanko
+      changes:
+        - insert:
+            tableName: reservations
+            columns:
+              - column: { name: user_id, valueNumeric: 1 }
+              - column: { name: car_id, valueNumeric: 1 }
+              - column: { name: start_at, value: "2025-01-12 09:00:00" }
+              - column: { name: end_at, value: "2025-01-12 18:00:00" }
+              - column: { name: status, value: "ACTIVE" }
+              - column: { name: created_at, value: "2025-01-11 09:00:00" }
