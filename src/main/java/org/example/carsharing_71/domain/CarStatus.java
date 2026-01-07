@@ -6,5 +6,6 @@ package org.example.carsharing_71.domain;
 public enum CarStatus {
     AVAILABLE,
     RESERVED,
-    MAINTENANCE
+    MAINTENANCE,
+    RENTED
 }

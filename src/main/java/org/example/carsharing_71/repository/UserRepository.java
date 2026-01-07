@@ -3,6 +3,8 @@ package org.example.carsharing_71.repository;
 import org.example.carsharing_71.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * Репозиторий для работы с пользователями в базе данных.
  * 
@@ -24,5 +26,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @note В текущей реализации есть опечатка в имени метода (exist вместо exists).
      *       Для корректной работы следует использовать existsByEmail.
      */
-//    boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
+
+    // Добавляем для Security
+    Optional<User> findByLogin(String login);
 }

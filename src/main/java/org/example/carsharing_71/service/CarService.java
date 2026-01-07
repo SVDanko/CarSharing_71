@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -60,5 +61,9 @@ public class CarService {
                 .filter(car -> seats == null || car.getCarModel().getSeats() >= seats)
                 .filter(car -> reservationRepository.countOverlaps(car.getId(), startAt, endAt) == 0)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Car> findById(Long id) {
+        return carRepository.findById(id);
     }
 }

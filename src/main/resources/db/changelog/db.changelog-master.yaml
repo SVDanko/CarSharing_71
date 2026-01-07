@@ -9,3 +9,9 @@ databaseChangeLog:
   - include:
       file: 003-add-indexes.yaml
       relativeToChangelogFile: true
+  - include:
+      file: 004-add-bulk-data.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: 005-add-missing-tables.yaml
+      relativeToChangelogFile: true

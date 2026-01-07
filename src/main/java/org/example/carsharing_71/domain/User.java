@@ -19,6 +19,12 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, unique = true)
+    private String login;
+
+    @Column(nullable = false)
+    private String password;
+
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
@@ -44,4 +50,20 @@ public class User {
     public void setRole(Role role) { this.role = role; }
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -73,12 +73,35 @@ databaseChangeLog:
       id: 002-seed-users
       author: DevDanko
       changes:
+        # user "admin"
         - insert:
             tableName: users
             columns:
+              - column: { name: login, value: "admin" }
+              - column: { name: password, value: "$2a$10$depV2yiIideoUNx0wUk74OqUqyGGHpkzHA7AZSWYXPFrIHt.Ft6py" }
+              - column: { name: email, value: "admin@example.com" }
+              - column: { name: full_name, value: "Admin" }
+              - column: { name: role, value: "ADMIN" }
+              - column: { name: created_at, value: "2025-01-10 09:00:00" }
+        # user "user"
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: login, value: "user" }
+              - column: { name: password, value: "$2a$10$JtmLrROanmzS1hjAzEeiDueDrN8280Hf73ho.m0eOI2nCMThaDIT." }
+              - column: { name: email, value: "user@example.com" }
+              - column: { name: full_name, value: "Test User" }
+              - column: { name: role, value: "USER" }
+              - column: { name: created_at, value: "2025-01-10 09:00:00" }
+        # user "student"
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: login, value: "student" }
+              - column: { name: password, value: "$2a$10$M5DlnxOxFkbWGHyR.wyUCOKWcK1hshQgYi3L/gfMfEvb/O0PfEoZq" }
               - column: { name: email, value: "student@example.com" }
-              - column: { name: full_name, value: "Студент Учебный" }
-              - column: { name: role, value: "ROLE_USER" }
+              - column: { name: full_name, value: "Student" }
+              - column: { name: role, value: "USER" }
               - column: { name: created_at, value: "2025-01-10 09:00:00" }
 
   - changeSet:

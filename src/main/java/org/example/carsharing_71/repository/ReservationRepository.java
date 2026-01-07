@@ -1,10 +1,13 @@
 package org.example.carsharing_71.repository;
 
 import org.example.carsharing_71.domain.Reservation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * Репозиторий бронирований.
@@ -27,4 +30,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             @Param("startAt") Instant startAt,
             @Param("endAt") Instant endAt
     );
+
+    List<Reservation> findByUser_Id(Long userId);
+
+    // Новый метод с пагинацией
+    Page<Reservation> findByUser_Id(Long userId, Pageable pageable);
 }

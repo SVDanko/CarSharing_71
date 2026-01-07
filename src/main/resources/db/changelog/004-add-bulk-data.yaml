@@ -1,0 +1,209 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-bulk-german-data
+      author: DevDanko
+      changes:
+        # 1. Новые локации (Германия)
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Berlin Mitte (Brandenburg Gate)" }
+              - column: { name: address, value: "Pariser Platz, 10117 Berlin" }
+              - column: { name: latitude, valueNumeric: 52.5163 }
+              - column: { name: longitude, valueNumeric: 13.3777 }
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Munich Airport (MUC)" }
+              - column: { name: address, value: "Nordallee 25, 85356 München" }
+              - column: { name: latitude, valueNumeric: 48.3537 }
+              - column: { name: longitude, valueNumeric: 11.7750 }
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Hamburg Harbor" }
+              - column: { name: address, value: "Landungsbrücken, 20359 Hamburg" }
+              - column: { name: latitude, valueNumeric: 53.5459 }
+              - column: { name: longitude, valueNumeric: 9.9666 }
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Cologne Cathedral" }
+              - column: { name: address, value: "Domkloster 4, 50667 Köln" }
+              - column: { name: latitude, valueNumeric: 50.9413 }
+              - column: { name: longitude, valueNumeric: 6.9583 }
+        - insert:
+            tableName: locations
+            columns:
+              - column: { name: name, value: "Frankfurt Main Station" }
+              - column: { name: address, value: "Am Hauptbahnhof, 60329 Frankfurt am Main" }
+              - column: { name: latitude, valueNumeric: 50.1071 }
+              - column: { name: longitude, valueNumeric: 8.6638 }
+
+        # 2. Новые модели машин
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "BMW" }
+              - column: { name: model_name, value: "3 Series" }
+              - column: { name: transmission, value: "AUTOMATIC" }
+              - column: { name: fuel_type, value: "PETROL" }
+              - column: { name: seats, valueNumeric: 5 }
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "Mercedes-Benz" }
+              - column: { name: model_name, value: "C-Class" }
+              - column: { name: transmission, value: "AUTOMATIC" }
+              - column: { name: fuel_type, value: "DIESEL" }
+              - column: { name: seats, valueNumeric: 5 }
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "Volkswagen" }
+              - column: { name: model_name, value: "Golf VIII" }
+              - column: { name: transmission, value: "MANUAL" }
+              - column: { name: fuel_type, value: "PETROL" }
+              - column: { name: seats, valueNumeric: 5 }
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "Audi" }
+              - column: { name: model_name, value: "A4 Avant" }
+              - column: { name: transmission, value: "AUTOMATIC" }
+              - column: { name: fuel_type, value: "DIESEL" }
+              - column: { name: seats, valueNumeric: 5 }
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: brand, value: "Porsche" }
+              - column: { name: model_name, value: "911 Carrera" }
+              - column: { name: transmission, value: "AUTOMATIC" }
+              - column: { name: fuel_type, value: "PETROL" }
+              - column: { name: seats, valueNumeric: 2 }
+
+        # 3. Массовое добавление машин (Используем valueComputed для поиска ID)
+
+        # Berlin
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = '3 Series')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-MW 3001" }
+              - column: { name: vin, value: "WBA12345678900001" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'Golf VIII')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-VW 5002" }
+              - column: { name: vin, value: "WVW12345678900002" }
+              - column: { name: status, value: "RENTED" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = '911 Carrera')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-PO 9110" }
+              - column: { name: vin, value: "WP012345678900003" }
+              - column: { name: status, value: "AVAILABLE" }
+
+        # Munich
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = '3 Series')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Munich%')" }
+              - column: { name: plate_number, value: "M-BW 1234" }
+              - column: { name: vin, value: "WBA12345678900004" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'C-Class')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Munich%')" }
+              - column: { name: plate_number, value: "M-BZ 9876" }
+              - column: { name: vin, value: "WDB12345678900005" }
+              - column: { name: status, value: "MAINTENANCE" }
+
+        # Hamburg
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'Golf VIII')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Hamburg%')" }
+              - column: { name: plate_number, value: "HH-GO 2024" }
+              - column: { name: vin, value: "WVW12345678900006" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'A4 Avant')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Hamburg%')" }
+              - column: { name: plate_number, value: "HH-AU 4040" }
+              - column: { name: vin, value: "WAU12345678900007" }
+              - column: { name: status, value: "AVAILABLE" }
+
+        # Cologne
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'C-Class')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Cologne%')" }
+              - column: { name: plate_number, value: "K-MB 1111" }
+              - column: { name: vin, value: "WDB12345678900008" }
+              - column: { name: status, value: "AVAILABLE" }
+
+        # Frankfurt
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'A4 Avant')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Frankfurt%')" }
+              - column: { name: plate_number, value: "F-AU 5555" }
+              - column: { name: vin, value: "WAU12345678900009" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = '3 Series')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Frankfurt%')" }
+              - column: { name: plate_number, value: "F-BM 7777" }
+              - column: { name: vin, value: "WBA12345678900010" }
+              - column: { name: status, value: "AVAILABLE" }
+
+        # Additional Cars in Berlin for Pagination
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'Golf VIII')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-PG 0001" }
+              - column: { name: vin, value: "WVW12345678900011" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'Golf VIII')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-PG 0002" }
+              - column: { name: vin, value: "WVW12345678900012" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'Golf VIII')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-PG 0003" }
+              - column: { name: vin, value: "WVW12345678900013" }
+              - column: { name: status, value: "AVAILABLE" }
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: model_id, valueComputed: "(SELECT id FROM car_models WHERE model_name = 'Golf VIII')" }
+              - column: { name: location_id, valueComputed: "(SELECT id FROM locations WHERE name LIKE 'Berlin%')" }
+              - column: { name: plate_number, value: "B-PG 0004" }
+              - column: { name: vin, value: "WVW12345678900014" }
+              - column: { name: status, value: "AVAILABLE" }
